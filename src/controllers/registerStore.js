@@ -1,4 +1,3 @@
-// ToDo - Retirar os retornos de 'error.message'
 const { PrismaClient } = require('@prisma/client');
 
 const bcrypt = require('bcrypt');
@@ -22,7 +21,7 @@ const registerStore = async (req, res) => {
     const { password: _, ...newStoreData } = newStore;
     return res.status(201).json(newStoreData);
   } catch (error) {
-    return res.status(500).json(error.message);
+    return res.status(500).json({ message: 'Internal server error!' });
   }
 };
 
