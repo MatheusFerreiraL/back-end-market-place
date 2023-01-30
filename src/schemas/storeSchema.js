@@ -6,7 +6,7 @@ const storeSchema = Joi.object({
     'string.empty': 'The store name field is mandatory!',
     'string.base': 'You must choose a valid name!',
   }),
-  email: Joi.string().email().required().messages({
+  email: Joi.string().email({ minDomainSegments: 2 }).required().messages({
     'any.required': 'The email field is mandatory!',
     'string.empty': 'The email field is mandatory!',
     'string.email': 'You must use an valid email!',
