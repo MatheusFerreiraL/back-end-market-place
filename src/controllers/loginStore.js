@@ -33,7 +33,7 @@ const loginStore = async (req, res) => {
 
     return res.status(200).json({ user: storeData, token });
   } catch (error) {
-    return res.status(500).json(error.message);
+    return res.status(500).json({ message: 'Internal server error!' });
   }
 };
 
