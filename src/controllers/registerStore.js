@@ -17,9 +17,12 @@ const registerStore = async (req, res) => {
     const encryptedPwd = await bcrypt.hash(password, 10);
     const newStore = await prisma.stores.create({
       data: { name, email, password: encryptedPwd },
+      select: {
+        name: true,
+        email: true,
+      },
     });
-    const { password: _, ...newStoreData } = newStore;
-    return res.status(201).json(newStoreData);
+    return res.status(201).json(newStore);
   } catch (error) {
     return res.status(500).json({ message: 'Internal server error!' });
   }
