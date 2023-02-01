@@ -19,14 +19,13 @@ const loggedAuth = async (req, res, next) => {
       where: {
         id,
       },
+      select: { id: true, email: true, name: true },
     });
 
     if ((await checkEmail(findStore.email)) === null)
       return res.status(401).json({ message: 'User unauthorized! ' });
 
-    const { password: _, ...storeData } = findStore;
-
-    req.store = storeData;
+    req.store = findStore;
 
     return next();
   } catch (error) {
