@@ -1,5 +1,12 @@
--- DropIndex
-DROP INDEX "Stores_password_key";
+-- CreateTable
+CREATE TABLE "Stores" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+
+    CONSTRAINT "Stores_pkey" PRIMARY KEY ("id")
+);
 
 -- CreateTable
 CREATE TABLE "Category" (
@@ -19,24 +26,16 @@ CREATE TABLE "Products" (
     "imagePath" TEXT NOT NULL,
     "imageUrl" TEXT NOT NULL,
     "categoryId" INTEGER NOT NULL,
+    "storeId" INTEGER NOT NULL,
 
     CONSTRAINT "Products_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
-CREATE TABLE "Bag" (
-    "id" SERIAL NOT NULL,
-    "customerId" INTEGER NOT NULL,
-    "productId" INTEGER NOT NULL,
-
-    CONSTRAINT "Bag_pkey" PRIMARY KEY ("id")
-);
+-- CreateIndex
+CREATE UNIQUE INDEX "Stores_email_key" ON "Stores"("email");
 
 -- AddForeignKey
 ALTER TABLE "Products" ADD CONSTRAINT "Products_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Bag" ADD CONSTRAINT "Bag_customerId_fkey" FOREIGN KEY ("customerId") REFERENCES "Stores"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Bag" ADD CONSTRAINT "Bag_productId_fkey" FOREIGN KEY ("productId") REFERENCES "Products"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Products" ADD CONSTRAINT "Products_storeId_fkey" FOREIGN KEY ("storeId") REFERENCES "Stores"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
