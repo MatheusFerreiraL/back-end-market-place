@@ -23,9 +23,11 @@ const registerProduct = async (req, res) => {
         imagePath: archive.path,
         imageUrl: archive.url,
         categoryId: parseInt(category, 10),
+        storeId: parseInt(id, 10),
       },
       include: {
-        category: true,
+        category: { select: { category_name: true } },
+        store: { select: { name: true } },
       },
     });
     return res.status(201).json(newProduct);
