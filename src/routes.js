@@ -11,21 +11,25 @@ const storeSchema = require('./schemas/storeSchema');
 const storeUpdateSchema = require('./schemas/storeUpdateSchema');
 const registerProduct = require('./controllers/registerProduct');
 const updateProduct = require('./controllers/updateProduct');
+const listAllProducts = require('./controllers/listAllProducts');
+const listStoreProducts = require('./controllers/listStoreProducts');
 
 const routes = express();
 
+routes.get('/home', listAllProducts);
 routes.post('/register', verifyRequestBody(storeSchema), registerStore);
 routes.post('/login', verifyRequestBody(storeLoginSchema), loginStore);
 
 routes.use(loggedAuth);
 
-routes.put('/user', verifyRequestBody(storeUpdateSchema), updateStore);
+routes.get('/myproducts', listStoreProducts);
 routes.post(
   '/product',
   multer.single('archive'),
   verifyRequestBody(productSchema),
   registerProduct
 );
+routes.put('/user', verifyRequestBody(storeUpdateSchema), updateStore);
 routes.put(
   '/product/:productId',
   multer.single('archive'),
