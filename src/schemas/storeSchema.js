@@ -9,8 +9,9 @@ const storeSchema = Joi.object({
   email: Joi.string().email({ minDomainSegments: 2 }).required().messages({
     'any.required': 'The email field is mandatory!',
     'string.empty': 'The email field is mandatory!',
-    'string.email': 'You must use an valid email!',
-    'string.base': 'You must choose a valid email!',
+    'string.email': 'You must use an valid email! Example: yourEmail@email.com',
+    'string.base':
+      'You must choose a valid email! Example: yourEmail@email.com',
   }),
   password: Joi.string().min(5).required().messages({
     'any.required': 'The password field is mandatory!',
