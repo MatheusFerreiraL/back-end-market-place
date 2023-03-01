@@ -13,15 +13,19 @@ const registerProduct = require('./controllers/registerProduct');
 const updateProduct = require('./controllers/updateProduct');
 const listAllProducts = require('./controllers/listAllProducts');
 const listStoreProducts = require('./controllers/listStoreProducts');
+const detailProduct = require('./controllers/detailProduct');
+const storeDetail = require('./controllers/storeDetail');
 
 const routes = express();
 
 routes.get('/home', listAllProducts);
+routes.get('/product/detailed/:productId', detailProduct);
 routes.post('/register', verifyRequestBody(storeSchema), registerStore);
 routes.post('/login', verifyRequestBody(storeLoginSchema), loginStore);
 
 routes.use(loggedAuth);
 
+routes.get('/store', storeDetail);
 routes.get('/myproducts', listStoreProducts);
 routes.post(
   '/product',
