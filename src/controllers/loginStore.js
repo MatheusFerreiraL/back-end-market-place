@@ -26,7 +26,7 @@ const loginStore = async (req, res) => {
         .status(400)
         .json({ message: 'Invalid credentials. Try again!' });
     const token = jwt.sign({ id: userData.id }, process.env.JWT_PWD, {
-      expiresIn: `${60 * 5}s`,
+      expiresIn: `${3600}s`,
     });
 
     const { password: _, ...storeData } = userData;

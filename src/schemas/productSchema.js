@@ -23,9 +23,9 @@ const productSchema = Joi.object({
     'number.base': 'You must choose a valid valid number of products!',
   }),
   category: Joi.string().required().messages({
-    'any.required': 'The description is mandatory!',
-    'string.empty': 'The description is mandatory!',
-    'string.base': 'You must choose a valid description!',
+    'any.required': 'The category is mandatory!',
+    'string.empty': 'The category is mandatory!',
+    'string.base': 'You must choose a valid category!',
   }),
 });
 
