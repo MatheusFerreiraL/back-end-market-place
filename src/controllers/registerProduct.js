@@ -7,7 +7,6 @@ const registerProduct = async (req, res) => {
   const { title, description, price, storage, category } = req.body;
   const { id } = req.store;
   const { file } = req;
-
   try {
     const archive = await uploadFile(
       `stores/${id}/products/${file.originalname}`,
